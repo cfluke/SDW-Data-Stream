@@ -1,4 +1,4 @@
-# Establishing-a-SSA-
+# Establishing a Space Situational Awareness
 Establishing a Space Situational Awareness Research Laboratory at Swinburne University
 
 Client : 
