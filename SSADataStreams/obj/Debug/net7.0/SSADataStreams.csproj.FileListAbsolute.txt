@@ -1,0 +1,17 @@
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\SSADataStreams.exe
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\SSADataStreams.deps.json
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\SSADataStreams.runtimeconfig.json
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\SSADataStreams.dll
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\SSADataStreams.pdb
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.AssemblyReference.cache
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.GeneratedMSBuildEditorConfig.editorconfig
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.AssemblyInfoInputs.cache
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.AssemblyInfo.cs
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.CoreCompileInputs.cache
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.dll
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\refint\SSADataStreams.dll
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.pdb
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.genruntimeconfig.cache
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\ref\SSADataStreams.dll
+D:\Jaycob\SSADataStreams\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Jaycob\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.CopyComplete
