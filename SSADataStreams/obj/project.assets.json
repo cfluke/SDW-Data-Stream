@@ -60,11 +60,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Jaycob\\SSADataStreams\\SSADataStreams.csproj",
+      "projectUniqueName": "C:\\Users\\jayco\\Documents\\GitHub\\Establishing-a-SSA\\SSADataStreams\\SSADataStreams.csproj",
       "projectName": "SSADataStreams",
-      "projectPath": "D:\\Jaycob\\SSADataStreams\\SSADataStreams.csproj",
+      "projectPath": "C:\\Users\\jayco\\Documents\\GitHub\\Establishing-a-SSA\\SSADataStreams\\SSADataStreams.csproj",
       "packagesPath": "C:\\Users\\jayco\\.nuget\\packages\\",
-      "outputPath": "D:\\Jaycob\\SSADataStreams\\obj\\",
+      "outputPath": "C:\\Users\\jayco\\Documents\\GitHub\\Establishing-a-SSA\\SSADataStreams\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jayco\\AppData\\Roaming\\NuGet\\NuGet.Config",
