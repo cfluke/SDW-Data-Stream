@@ -6,5 +6,7 @@ using System.Text.Json;
 
 
 SpaceWeatherServiceAPICaller SWSCaller = new SpaceWeatherServiceAPICaller();
+NOAASWPCAPICaller NOAACaller = new NOAASWPCAPICaller();
 
-await SWSCaller.CallSWSAPIAsync();
+//await SWSCaller.CallSWSAPIAsync();
+await NOAACaller.CallNOAASWPCAPIAsync();
