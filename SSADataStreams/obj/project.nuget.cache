@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SCIswTwKHujaF5JNqmsYKpj9elF4ndDB68kr6nEDTFENCRdbHZKFUgx+yDOHPuw6vbUc0A/sRkiVKJQZk8Ne8w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\David\\Desktop\\uni work\\Sem1 2023\\Final Year Engineering Project A\\work\\repo\\Establishing-a-SSA\\SSADataStreams\\SSADataStreams.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\David\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
