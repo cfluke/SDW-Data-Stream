@@ -24,6 +24,18 @@ namespace SSADataStreams
                 //The endpoints can return blank if there is no alert/warning
                 List<string> APIEndpointsNoOptions = new List<string>
                 {
+                    "json/boulder_k_index_1m.json",
+                    "json/edited_events.json",
+                    "json/electron_fluence_forecast.json",
+                    "json/enlil_time_series.json",
+                    "json/f107_cm_flux.json",
+                    "json/ovation_aurora_latest.json",
+                    "json/planetary_k_index_1m.json",
+                    "json/predicted_f107cm_flux.json",
+                    "json/predicted_fredericksburg_a_index.json",
+                    "json/predicted_monthly_sunspot_number.json",
+                    "json/solar_probabilities.json",
+                    "json/solar_regions.json",
                     "json/sunspot_report.json"
                 };
 
@@ -66,9 +78,6 @@ namespace SSADataStreams
                     }
                     Console.WriteLine(element.Numspot);
                 }
-
-
-               
             }
             return "Complete";
         }
