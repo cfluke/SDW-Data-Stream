@@ -8,7 +8,7 @@ namespace SSADataStreams
 {
     internal class SpaceWeatherServiceAPICaller
     {
-        public async Task<int> CallSWSAPIAsync()
+        public async Task<List<string>> CallSWSAPIAsync()
         {
             try
             {
@@ -48,19 +48,19 @@ namespace SSADataStreams
                     ""end"": ""prop1""
                     }
 		        }";
-
+                List<String> returnList = new List<String>();
                 //Call each API endpoint async
-                await CallSWSAPIEndpointsAsync(optionsReduced, APIEndpointsWithOptions);
-                await CallSWSAPIEndpointsAsync(APIKeyOnly, APIEndpointsNoOptions);
-                return 1;
+                returnList.Concat(await CallSWSAPIEndpointsAsync(optionsReduced, APIEndpointsWithOptions));
+                returnList.Concat(await CallSWSAPIEndpointsAsync(APIKeyOnly, APIEndpointsNoOptions));
+                return returnList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return 0;
+                return new List<String> { ex.ToString() };
             }
         }
-        async Task<string> CallSWSAPIEndpointsAsync(string JSONOptions, List<string> endpoints)
+        async Task<List<string>> CallSWSAPIEndpointsAsync(string JSONOptions, List<string> endpoints)
         {
             List<string> responses = new List<string>();
             foreach (string endpoint in endpoints)
@@ -78,15 +78,15 @@ namespace SSADataStreams
 
                 //Read the response
                 string responseJson = await response.Content.ReadAsStringAsync();
-
+                responses.Add(responseJson);
                 //Write to file using StreamWriter
-                using (StreamWriter writer = new StreamWriter(".\\APICALLS.txt", true))
+                using (StreamWriter writer = new StreamWriter(".\\Data\\SWS_APICALLS.txt", false))
                 {
                     writer.WriteLine(responseJson);
                 }
                 Console.WriteLine(responseJson);
             }
-            return "Complete";
+            return responses;
         }
     }
 }

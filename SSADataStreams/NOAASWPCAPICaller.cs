@@ -9,20 +9,13 @@ namespace SSADataStreams
 {
     internal class NOAASWPCAPICaller
     {
-        public async Task<int> CallNOAASWPCAPIAsync()
+        public async Task<List<string>> CallNOAASWPCAPIAsync()
         {
             try
             {
-                //API endpoints that require options
-                List<string> APIEndpointsWithOptions = new List<string>
-                {
-                    "get-a-index",
-                    "get-k-index",
-                    "get-dst-index",
-                };
                 //API endpoints that only require an API key
                 //The endpoints can return blank if there is no alert/warning
-                List<string> APIEndpointsNoOptions = new List<string>
+                List<String> APIEndpointsNoOptions = new List<String>
                 {
                     "json/boulder_k_index_1m.json",
                     "json/edited_events.json",
@@ -40,16 +33,15 @@ namespace SSADataStreams
                 };
 
                 //Call each API endpoint async
-                await CallNOAASWPCAPIEndpointsAsync(APIEndpointsNoOptions);
-                return 1;
+                return await CallNOAASWPCAPIEndpointsAsync(APIEndpointsNoOptions);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return 0;
+                return new List<String> { ex.ToString() };
             }
         }
-        async Task<string> CallNOAASWPCAPIEndpointsAsync(List<string> endpoints)
+        async Task<List<string>> CallNOAASWPCAPIEndpointsAsync(List<String> endpoints)
         {
             List<string> responses = new List<string>();
             foreach (string endpoint in endpoints)
@@ -67,19 +59,16 @@ namespace SSADataStreams
 
                 //Read the response
                 string responseJson = await response.Content.ReadAsStringAsync();
-                List<NOAASWPCSunspotJSON> responseJsonDeserialized = JsonConvert.DeserializeObject<List<NOAASWPCSunspotJSON>>(responseJson);
+                responses.Add(responseJson);
+                //List <endpoint> responseJsonDeserialized = JsonConvert.DeserializeObject<List<endpoint>>(responseJson);
 
-                foreach (NOAASWPCSunspotJSON element in responseJsonDeserialized)
+                using (StreamWriter writer = new StreamWriter(".\\Data\\NOAA_APICALLS.txt", true))
                 {
-                    //Write to file using StreamWriter
-                    using (StreamWriter writer = new StreamWriter(".\\APICALLS.txt", true))
-                    {
-                        writer.WriteLine(element);
-                    }
-                    Console.WriteLine(element.Numspot);
+                    writer.WriteLine(responseJson);
                 }
+                Console.WriteLine(responseJson);
             }
-            return "Complete";
+            return responses;
         }
     }
 }
