@@ -47,6 +47,8 @@ namespace SSADataStreams
             foreach (string endpoint in endpoints)
             {
                 string fullURL = "https://services.swpc.noaa.gov/" + endpoint;
+                //Log URL
+                Console.WriteLine("Pulling data from: " + fullURL);
 
                 //Create an HttpClient instance
                 HttpClient httpClient = new HttpClient();
@@ -59,14 +61,26 @@ namespace SSADataStreams
 
                 //Read the response
                 string responseJson = await response.Content.ReadAsStringAsync();
-                responses.Add(responseJson);
+                //Check status code
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Error occured while contacting " + fullURL + ": " + responseJson);
+                    responses.Add("Error occured while contacting " + fullURL + ": " + responseJson);
+                } else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Successfully pulled data from " + fullURL);
+                    responses.Add(responseJson);
+                }
+                Console.ResetColor();
+
                 //List <endpoint> responseJsonDeserialized = JsonConvert.DeserializeObject<List<endpoint>>(responseJson);
 
                 using (StreamWriter writer = new StreamWriter(".\\Data\\NOAA_APICALLS.txt", true))
                 {
                     writer.WriteLine(responseJson);
                 }
-                Console.WriteLine(responseJson);
             }
             return responses;
         }

@@ -11,5 +11,13 @@ NOAASWPCAPICaller NOAACaller = new NOAASWPCAPICaller();
 Console.WriteLine(await SWSCaller.CallSWSAPIAsync());
 Console.WriteLine(await NOAACaller.CallNOAASWPCAPIAsync());
 //Store collected data under today's date
-System.IO.File.Move(".\\Data\\SWS.txt", ".\\Data\\SWS" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
-System.IO.File.Move(".\\Data\\NOAA_APICALLS.txt", ".\\Data\\NOAA_APICALLS_" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
+Console.WriteLine("Writing data to file: " + "...APICALLS_" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
+try
+{
+    System.IO.File.Move(".\\Data\\SWS_APICALLS.txt", ".\\Data\\SWS_APICALLS_" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
+    System.IO.File.Move(".\\Data\\NOAA_APICALLS.txt", ".\\Data\\NOAA_APICALLS_" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
+} catch(Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(ex.ToString());
+}

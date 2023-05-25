@@ -66,6 +66,8 @@ namespace SSADataStreams
             foreach (string endpoint in endpoints)
             {
                 string fullURL = "https://sws-data.sws.bom.gov.au/api/v1/" + endpoint;
+                //Log URL
+                Console.WriteLine("Pulling data from: " + fullURL);
 
                 //Create an HttpClient instance
                 HttpClient httpClient = new HttpClient();
@@ -78,13 +80,25 @@ namespace SSADataStreams
 
                 //Read the response
                 string responseJson = await response.Content.ReadAsStringAsync();
-                responses.Add(responseJson);
+                //Check status code
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Error occured while contacting " + fullURL + ": " + responseJson);
+                    responses.Add("Error occured while contacting " + fullURL + ": " + responseJson);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Successfully pulled data from " + fullURL);
+                    responses.Add(responseJson);
+                }
+                Console.ResetColor();
                 //Write to file using StreamWriter
                 using (StreamWriter writer = new StreamWriter(".\\Data\\SWS_APICALLS.txt", false))
                 {
                     writer.WriteLine(responseJson);
                 }
-                Console.WriteLine(responseJson);
             }
             return responses;
         }
