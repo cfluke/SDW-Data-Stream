@@ -1,0 +1,3 @@
+https://weatherstack.com/dashboard
+API
+cea49d74cac065d428df3e353abb9a7c
