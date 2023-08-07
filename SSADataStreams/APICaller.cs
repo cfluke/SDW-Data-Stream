@@ -1,0 +1,112 @@
+﻿using CsvHelper;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Formats.Asn1;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+
+namespace SSADataStreams
+{
+    internal abstract class APICaller
+    {
+        private string _APICallerName;
+
+        public string APICallerName { get => _APICallerName; set => _APICallerName = value; }
+
+        protected APICaller(string APICallerName) {
+            _APICallerName = APICallerName;
+        }
+        public async Task<List<string>> CallAPITextEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "")
+        {
+            List<string> responses = new List<string>();
+            foreach (string endpoint in endpoints)
+            {
+                string fullURL = baseURL + endpoint;
+                //Log URL
+                Console.WriteLine("Pulling data from: " + fullURL);
+
+                //Create an HttpClient instance
+                HttpClient httpClient = new HttpClient();
+
+                //Create the HTTP request content
+                StringContent content = new StringContent(JSONOptions, Encoding.UTF8, "application/json");
+
+                //Send the GET/POST request
+                HttpResponseMessage response;
+                if (httpMethod == HttpMethod.Post)
+                {
+                    response = await httpClient.PostAsync(fullURL, content);
+                } else
+                {
+                    response = await httpClient.GetAsync(fullURL);
+                }
+                
+                //Read the response
+                string responseJson = await response.Content.ReadAsStringAsync();
+                //Check status code
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Error occured while contacting " + fullURL + ": " + responseJson);
+                    responses.Add("Error occured while contacting " + fullURL + ": " + responseJson);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Successfully pulled data from " + fullURL);
+                    responses.Add(responseJson);
+                }
+                //Reset console colour from red/green
+                Console.ResetColor();
+                //Write to file using StreamWriter
+                WriteCSVFile(endpoint, APICallerName, responseJson);
+            }
+            return responses;
+        }
+        public abstract Task<List<string>> CallAPIAsync();
+
+        protected void WriteDataLine(string fileName,string dataLine)
+        {
+            string directoryPath = ".\\Data\\" + APICallerName + "\\";
+            //Create directory if it does not exist by getting info
+            DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
+
+            using StreamWriter writer = new StreamWriter(directoryPath + fileName.ToUpper().Replace("-", "_") + ".csv", true);
+            writer.WriteLine(dataLine + Environment.NewLine);
+        }
+        public static void WriteCSVFile(string fileName, string folderName, string jsonContent)
+        {
+            //Console.WriteLine(jsonContent);
+            //NewtonSoft json nuget package
+            XmlNode xml = JsonConvert.DeserializeXmlNode("{records:{record:[" + jsonContent + "]}}");
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(xml.InnerXml);
+            XmlReader xmlReader = new XmlNodeReader(xml);
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(xmlReader);
+            //Check if data was returned from API
+            DataTable dataTable = new DataTable();
+            dataTable = dataSet.Tables[dataSet.Tables.Count - 1];
+            //Datatable to CSV
+            var lines = new List<string>();
+            string[] columnNames = dataTable.Columns.Cast<DataColumn>().
+                                              Select(column => column.ColumnName).
+                                              ToArray();
+            var header = string.Join(",", columnNames);
+            lines.Add(header);
+            var valueLines = dataTable.AsEnumerable()
+                               .Select(row => string.Join(",", row.ItemArray));
+            lines.AddRange(valueLines);
+            string directoryPath = ".\\Data\\" + folderName + "\\";
+            DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
+            File.WriteAllLines(directoryPath + fileName + ".csv", lines);
+        }
+
+    }
+}

@@ -32,3 +32,21 @@ C:\Users\jayco\Documents\GitHub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7
 C:\Users\jayco\Documents\GitHub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.pdb
 C:\Users\jayco\Documents\GitHub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.genruntimeconfig.cache
 C:\Users\jayco\Documents\GitHub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\ref\SSADataStreams.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SSADataStreams.exe
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SSADataStreams.deps.json
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SSADataStreams.runtimeconfig.json
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SSADataStreams.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SSADataStreams.pdb
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\Newtonsoft.Json.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.AssemblyReference.cache
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.GeneratedMSBuildEditorConfig.editorconfig
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.AssemblyInfoInputs.cache
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.AssemblyInfo.cs
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.CoreCompileInputs.cache
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.csproj.CopyComplete
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\refint\SSADataStreams.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.pdb
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.genruntimeconfig.cache
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\ref\SSADataStreams.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\CsvHelper.dll

@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace SSADataStreams
 {
-    internal class SpaceWeatherServiceAPICaller
+    internal class SpaceWeatherServiceAPICaller : APICaller
     {
-        public async Task<List<string>> CallSWSAPIAsync()
+        public SpaceWeatherServiceAPICaller(): base("SpaceWeather")
+        {
+
+        }
+        public override async Task<List<string>> CallAPIAsync()
         {
             try
             {
@@ -29,17 +33,18 @@ namespace SSADataStreams
                     "get-aurora-watch",
                     "get-aurora-outlook"
                 };
-
+                //Options map with API key
                 string APIKeyOnly = @"{
                 ""api_key"": ""710f9362-83c8-4c2e-92fb-2baf5ab8825d""
 		        }";
-
+                //Options map with API key and location
                 string optionsReduced = @"{
                 ""api_key"": ""710f9362-83c8-4c2e-92fb-2baf5ab8825d"",
                 ""options"": {
                     ""location"": ""Australian region""
-                }
+                    }
 		        }";
+                //Options map with full options
                 string optionsFull = @"{
                 ""api_key"": ""710f9362-83c8-4c2e-92fb-2baf5ab8825d"",
                 ""options"": {
@@ -50,8 +55,8 @@ namespace SSADataStreams
 		        }";
                 List<String> returnList = new List<String>();
                 //Call each API endpoint async
-                returnList.Concat(await CallSWSAPIEndpointsAsync(optionsReduced, APIEndpointsWithOptions));
-                returnList.Concat(await CallSWSAPIEndpointsAsync(APIKeyOnly, APIEndpointsNoOptions));
+                returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsWithOptions, HttpMethod.Post, optionsReduced));
+                returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsNoOptions, HttpMethod.Post, APIKeyOnly));
                 return returnList;
             }
             catch (Exception ex)
@@ -59,48 +64,6 @@ namespace SSADataStreams
                 Console.WriteLine(ex.Message);
                 return new List<String> { ex.ToString() };
             }
-        }
-        async Task<List<string>> CallSWSAPIEndpointsAsync(string JSONOptions, List<string> endpoints)
-        {
-            List<string> responses = new List<string>();
-            foreach (string endpoint in endpoints)
-            {
-                string fullURL = "https://sws-data.sws.bom.gov.au/api/v1/" + endpoint;
-                //Log URL
-                Console.WriteLine("Pulling data from: " + fullURL);
-
-                //Create an HttpClient instance
-                HttpClient httpClient = new HttpClient();
-
-                //Create the HTTP request content
-                StringContent content = new StringContent(JSONOptions, Encoding.UTF8, "application/json");
-
-                //Send the POST request
-                HttpResponseMessage response = await httpClient.PostAsync(fullURL, content);
-
-                //Read the response
-                string responseJson = await response.Content.ReadAsStringAsync();
-                //Check status code
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Error occured while contacting " + fullURL + ": " + responseJson);
-                    responses.Add("Error occured while contacting " + fullURL + ": " + responseJson);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Successfully pulled data from " + fullURL);
-                    responses.Add(responseJson);
-                }
-                Console.ResetColor();
-                //Write to file using StreamWriter
-                using (StreamWriter writer = new StreamWriter(".\\Data\\SWS_APICALLS.txt", false))
-                {
-                    writer.WriteLine(responseJson);
-                }
-            }
-            return responses;
         }
     }
 }

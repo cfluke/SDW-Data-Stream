@@ -7,82 +7,54 @@ using System.Threading.Tasks;
 
 namespace SSADataStreams
 {
-    internal class NOAASWPCAPICaller
+    internal class NOAASWPCAPICaller : APICaller
     {
-        public async Task<List<string>> CallNOAASWPCAPIAsync()
+        public NOAASWPCAPICaller(): base("NOAA")
+        {
+
+        }
+        public override async Task<List<string>> CallAPIAsync()
         {
             try
             {
                 //API endpoints that only require an API key
                 //The endpoints can return blank if there is no alert/warning
-                List<String> APIEndpointsNoOptions = new List<String>
+                Dictionary<string, List<string>> endpointSubpageMap = new Dictionary<string, List<string>>();
+
+                List<String> APIEndpointsJSON = new List<String>
                 {
-                    "json/boulder_k_index_1m.json",
-                    "json/edited_events.json",
-                    "json/electron_fluence_forecast.json",
-                    "json/enlil_time_series.json",
-                    "json/f107_cm_flux.json",
-                    "json/ovation_aurora_latest.json",
-                    "json/planetary_k_index_1m.json",
-                    "json/predicted_f107cm_flux.json",
-                    "json/predicted_fredericksburg_a_index.json",
-                    "json/predicted_monthly_sunspot_number.json",
-                    "json/solar_probabilities.json",
-                    "json/solar_regions.json",
-                    "json/sunspot_report.json"
+                    "boulder_k_index_1m.json",
+                    "edited_events.json",
+                    "electron_fluence_forecast.json",
+                    "enlil_time_series.json",
+                    "f107_cm_flux.json",
+                    //"ovation_aurora_latest.json",
+                    "planetary_k_index_1m.json",
+                    "predicted_f107cm_flux.json",
+                    "predicted_fredericksburg_a_index.json",
+                    "predicted_monthly_sunspot_number.json",
+                    "solar_probabilities.json",
+                    "solar_regions.json",
+                    "sunspot_report.json"
                 };
 
+
+                endpointSubpageMap.Add("json/", APIEndpointsJSON);
+
+                List<string> responseLast = new List<string>();
                 //Call each API endpoint async
-                return await CallNOAASWPCAPIEndpointsAsync(APIEndpointsNoOptions);
+                foreach (string subpage in endpointSubpageMap.Keys)
+                {
+                    //Blank string on end as NOAA does not need authentication yet
+                    responseLast = await CallAPITextEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get);
+                }
+                return responseLast;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return new List<String> { ex.ToString() };
             }
-        }
-        async Task<List<string>> CallNOAASWPCAPIEndpointsAsync(List<String> endpoints)
-        {
-            List<string> responses = new List<string>();
-            foreach (string endpoint in endpoints)
-            {
-                string fullURL = "https://services.swpc.noaa.gov/" + endpoint;
-                //Log URL
-                Console.WriteLine("Pulling data from: " + fullURL);
-
-                //Create an HttpClient instance
-                HttpClient httpClient = new HttpClient();
-
-                //Create the HTTP request content
-                StringContent content = new StringContent("", Encoding.UTF8, "application/json");
-
-                //Send the POST request
-                HttpResponseMessage response = await httpClient.GetAsync(fullURL);
-
-                //Read the response
-                string responseJson = await response.Content.ReadAsStringAsync();
-                //Check status code
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Error occured while contacting " + fullURL + ": " + responseJson);
-                    responses.Add("Error occured while contacting " + fullURL + ": " + responseJson);
-                } else
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Successfully pulled data from " + fullURL);
-                    responses.Add(responseJson);
-                }
-                Console.ResetColor();
-
-                //List <endpoint> responseJsonDeserialized = JsonConvert.DeserializeObject<List<endpoint>>(responseJson);
-
-                using (StreamWriter writer = new StreamWriter(".\\Data\\NOAA_APICALLS.txt", true))
-                {
-                    writer.WriteLine(responseJson);
-                }
-            }
-            return responses;
         }
     }
 }
