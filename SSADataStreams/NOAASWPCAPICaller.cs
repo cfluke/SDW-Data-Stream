@@ -38,15 +38,52 @@ namespace SSADataStreams
                     "sunspot_report.json"
                 };
 
+                List<String> APIEndpointsJSONSolarCycle = new List<String>
+                {
+                    "f10-7cm-flux-smoothed.json",
+                    "f10-7cm-flux.json",
+                    "observed-solar-cycle-indices.json",
+                    "predicted-solar-cycle.json",
+                    "solar-cycle-25-f10-7cm-flux-predicted-high-low.json",
+                    "solar-cycle-25-predicted.json",
+                    "solar-cycle-25-ssn-predicted-high-low.json",
+                    "sunspots-smoothed.json",
+                    "sunspots.json",
+                    "swpc_observed_ssn.json"
+                };
+
+                List<String> APIEndpointsJSONStereo = new List<String>
+                {
+                    "stereo_a_1m.json"
+                };
+
+                List<String> APIEndpointsJSONRTSW = new List<String>
+                {
+                    "rtsw_ephemerides_1h.json",
+                    "rtsw_mag_1m.json",
+                    "rtsw_wind_1m.json"
+                };
+
+                List<String> APIEndpointsJSONGeoSpace = new List<String>
+                {
+                    "geospace_dst_1_hour.json",
+                    "geospace_pred_est_kp_1_hour.json",
+                    "geospce_pred_est_kp_7_day.json"
+                };
+
 
                 endpointSubpageMap.Add("json/", APIEndpointsJSON);
+                endpointSubpageMap.Add("json/solar-cycle/", APIEndpointsJSONSolarCycle);
+                endpointSubpageMap.Add("json/stereo/", APIEndpointsJSONStereo);
+                endpointSubpageMap.Add("json/rtsw/", APIEndpointsJSONRTSW);
+                endpointSubpageMap.Add("json/geospace/", APIEndpointsJSONGeoSpace);
 
                 List<string> responseLast = new List<string>();
                 //Call each API endpoint async
                 foreach (string subpage in endpointSubpageMap.Keys)
                 {
                     //Blank string on end as NOAA does not need authentication yet
-                    responseLast = await CallAPITextEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get);
+                    responseLast = await CallAPITextEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get, "", subpage);
                 }
                 return responseLast;
             }

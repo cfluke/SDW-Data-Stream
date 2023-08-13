@@ -10,30 +10,44 @@ List<APICaller> APICallerList = new List<APICaller>();
 SpaceWeatherServiceAPICaller SpaceWeatherServiceCaller = new SpaceWeatherServiceAPICaller();
 NOAASWPCAPICaller NOAASWPCCaller = new NOAASWPCAPICaller();
 //Add API callers to list to run through
-APICallerList.Add(SpaceWeatherServiceCaller);
+//APICallerList.Add(SpaceWeatherServiceCaller);
 APICallerList.Add(NOAASWPCCaller);
 //Run through each caller, write response to file
 foreach (APICaller APICaller in APICallerList)
 {
     //Run API calls and await results
     Console.WriteLine(await APICaller.CallAPIAsync());
-
-    try
+}
+//Move all collected data to new folder with date
+try
+{
+    string sourceDirName = ".\\Data\\CurrentRun";
+    string destDirName = ".\\Data\\DataCalls" + "_" + DateTime.Now.ToString("yyyyMMdd");
+    //Append number to folder name if already exists
+    int folderIndex = 0;
+    bool folderMoveFailed = true;
+    string destDirNameTemp = destDirName;
+    while (folderMoveFailed)
     {
-        string sourceDirName = ".\\Data\\" + APICaller.APICallerName;
-        string destDirName = ".\\Data\\" + APICaller.APICallerName + "_" + DateTime.Now.ToString("yyyyMMdd");
         try
         {
-            Directory.Move(sourceDirName, destDirName);
+            Directory.Move(sourceDirName, destDirNameTemp);
+            folderMoveFailed = false;
         }
         catch (IOException exp)
         {
             Console.WriteLine(exp.Message);
+            folderMoveFailed = true;
+            destDirNameTemp = destDirName + "_" + folderIndex;
+            folderIndex++;
         }
     }
-    catch (Exception ex)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(ex.ToString());
-    }
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Successfully collected data and stored in: " + destDirNameTemp);
+
+}
+catch (Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(ex.ToString());
 }

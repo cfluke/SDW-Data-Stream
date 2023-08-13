@@ -22,7 +22,7 @@ namespace SSADataStreams
         protected APICaller(string APICallerName) {
             _APICallerName = APICallerName;
         }
-        public async Task<List<string>> CallAPITextEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "")
+        public async Task<List<string>> CallAPITextEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "", string subFolder = "")
         {
             List<string> responses = new List<string>();
             foreach (string endpoint in endpoints)
@@ -65,21 +65,16 @@ namespace SSADataStreams
                 //Reset console colour from red/green
                 Console.ResetColor();
                 //Write to file using StreamWriter
-                WriteCSVFile(endpoint, APICallerName, responseJson);
+                if (subFolder != "")
+                {
+                    subFolder = "\\" + subFolder;
+                }
+                WriteCSVFile(endpoint, APICallerName + subFolder, responseJson);
             }
             return responses;
         }
         public abstract Task<List<string>> CallAPIAsync();
 
-        protected void WriteDataLine(string fileName,string dataLine)
-        {
-            string directoryPath = ".\\Data\\" + APICallerName + "\\";
-            //Create directory if it does not exist by getting info
-            DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
-
-            using StreamWriter writer = new StreamWriter(directoryPath + fileName.ToUpper().Replace("-", "_") + ".csv", true);
-            writer.WriteLine(dataLine + Environment.NewLine);
-        }
         public static void WriteCSVFile(string fileName, string folderName, string jsonContent)
         {
             //Console.WriteLine(jsonContent);
@@ -103,7 +98,7 @@ namespace SSADataStreams
             var valueLines = dataTable.AsEnumerable()
                                .Select(row => string.Join(",", row.ItemArray));
             lines.AddRange(valueLines);
-            string directoryPath = ".\\Data\\" + folderName + "\\";
+            string directoryPath = ".\\Data\\CurrentRun\\" + folderName + "\\";
             DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
             File.WriteAllLines(directoryPath + fileName + ".csv", lines);
         }
