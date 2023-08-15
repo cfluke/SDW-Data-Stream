@@ -1,8 +1,8 @@
 ﻿using CsvHelper;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Formats.Asn1;
 using System.IO;
 using System.Linq;
@@ -10,6 +10,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Net.Http;
+using SixLabors.ImageSharp;
+using System.Collections;
 
 namespace SSADataStreams
 {
@@ -25,15 +28,13 @@ namespace SSADataStreams
         public async Task<List<string>> CallAPITextEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "", string subFolder = "")
         {
             List<string> responses = new List<string>();
+            //Create an HttpClient instance (Created here as HttpClients should be reused)
+            HttpClient httpClient = new HttpClient();
             foreach (string endpoint in endpoints)
             {
                 string fullURL = baseURL + endpoint;
                 //Log URL
                 Console.WriteLine("Pulling data from: " + fullURL);
-
-                //Create an HttpClient instance
-                HttpClient httpClient = new HttpClient();
-
                 //Create the HTTP request content
                 StringContent content = new StringContent(JSONOptions, Encoding.UTF8, "application/json");
 
@@ -46,7 +47,6 @@ namespace SSADataStreams
                 {
                     response = await httpClient.GetAsync(fullURL);
                 }
-                
                 //Read the response
                 string responseJson = await response.Content.ReadAsStringAsync();
                 //Check status code
@@ -70,6 +70,59 @@ namespace SSADataStreams
                     subFolder = "\\" + subFolder;
                 }
                 WriteCSVFile(endpoint, APICallerName + subFolder, responseJson);
+            }
+            return responses;
+        }
+
+        public async Task<List<Image>> CallAPIImageEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod, string JSONOptions = "", string subFolder = "")
+        {
+            List<Image> responses = new List<Image>();
+            //Create an HttpClient instance (Created here as HttpClients should be reused)
+            HttpClient httpClient = new HttpClient();
+            foreach (string endpoint in endpoints)
+            {
+                string fullURL = baseURL + endpoint;
+                //Log URL
+                Console.WriteLine("Pulling data from: " + fullURL);
+                //Create the HTTP request content
+                StringContent content = new StringContent(JSONOptions, Encoding.UTF8, "application/json");
+
+                //Send the GET/POST request
+                HttpResponseMessage response;
+                if (httpMethod == HttpMethod.Post)
+                {
+                    response = await httpClient.PostAsync(fullURL, content);
+                }
+                else
+                {
+                    response = await httpClient.GetAsync(fullURL);
+                }
+                //Read the response stream
+                Stream stream = await response.Content.ReadAsStreamAsync();
+                byte[] imageData = new byte[stream.Length];
+                stream.Read(imageData, 0, (int)stream.Length);
+                var image = Image.Load<Rgba32>(stream);
+                //Check status code
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Error occured while contacting " + fullURL + ": " + image);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Successfully pulled data from " + fullURL);
+                    responses.Add(image);
+                }
+                //Reset console colour from red/green
+                Console.ResetColor();
+                //Write to file using StreamWriter
+                if (subFolder != "")
+                {
+                    subFolder = "\\" + subFolder;
+                }
+                //Save image to file
+                image.Save(subFolder);
             }
             return responses;
         }

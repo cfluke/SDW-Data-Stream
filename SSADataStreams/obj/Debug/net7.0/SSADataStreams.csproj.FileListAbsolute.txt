@@ -50,3 +50,7 @@ G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADat
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\SSADataStreams.genruntimeconfig.cache
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\obj\Debug\net7.0\ref\SSADataStreams.dll
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\CsvHelper.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\System.Drawing.Common.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "EtmcmWeZcC9ITdeSO3RwnTeo6QjuGqZybKLkpH6z8fWar3rjcXOrF2ePeW4ihouqiwTVvitFPPcNbfXKBeKjwQ==",
+  "dgSpecHash": "VIslHPvyRy4aYI+iUhOVt+6Onm8StwGALbzMvjh160aGCXh7We32oK0eub6jMTuuBn/WBoeaZrasN+TKnWO4jA==",
   "success": true,
   "projectFilePath": "G:\\My Drive\\SwinGithub\\Establishing-a-SSA\\SSADataStreams\\SSADataStreams.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jayco\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
-    "C:\\Users\\jayco\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\jayco\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\jayco\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\jayco\\.nuget\\packages\\sixlabors.imagesharp\\3.0.1\\sixlabors.imagesharp.3.0.1.nupkg.sha512",
+    "C:\\Users\\jayco\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
