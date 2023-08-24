@@ -10,7 +10,7 @@ List<APICaller> APICallerList = new List<APICaller>();
 SpaceWeatherServiceAPICaller SpaceWeatherServiceCaller = new SpaceWeatherServiceAPICaller();
 NOAASWPCAPICaller NOAASWPCCaller = new NOAASWPCAPICaller();
 //Add API callers to list to run through
-//APICallerList.Add(SpaceWeatherServiceCaller);
+APICallerList.Add(SpaceWeatherServiceCaller);
 APICallerList.Add(NOAASWPCCaller);
 //Run through each caller, write response to file
 foreach (APICaller APICaller in APICallerList)
@@ -21,6 +21,8 @@ foreach (APICaller APICaller in APICallerList)
 //Move all collected data to new folder with date
 try
 {
+    //Create CurrentRun directory to ensure it exists
+    Directory.CreateDirectory(".\\Data\\CurrentRun");
     string sourceDirName = ".\\Data\\CurrentRun";
     string destDirName = ".\\Data\\DataCalls" + "_" + DateTime.Now.ToString("yyyyMMdd");
     //Append number to folder name if already exists
@@ -36,7 +38,7 @@ try
         }
         catch (IOException exp)
         {
-            Console.WriteLine(exp.Message);
+            //Console.WriteLine(exp.Message);
             folderMoveFailed = true;
             destDirNameTemp = destDirName + "_" + folderIndex;
             folderIndex++;

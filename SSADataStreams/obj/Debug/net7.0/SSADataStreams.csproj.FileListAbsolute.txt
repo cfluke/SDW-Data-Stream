@@ -54,3 +54,4 @@ G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\Micros
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\System.Drawing.Common.dll
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
 G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+G:\My Drive\SwinGithub\Establishing-a-SSA\SSADataStreams\bin\Debug\net7.0\SixLabors.ImageSharp.dll

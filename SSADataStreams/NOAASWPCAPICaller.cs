@@ -19,7 +19,8 @@ namespace SSADataStreams
             {
                 //API endpoints that only require an API key
                 //The endpoints can return blank if there is no alert/warning
-                Dictionary<string, List<string>> endpointSubpageMap = new Dictionary<string, List<string>>();
+                Dictionary<string, List<string>> endpointTextSubpageMap = new Dictionary<string, List<string>>();
+                Dictionary<string, List<string>> endpointImageSubpageMap = new Dictionary<string, List<string>>();
 
                 List<String> APIEndpointsJSON = new List<String>
                 {
@@ -71,21 +72,55 @@ namespace SSADataStreams
                     "geospce_pred_est_kp_7_day.json"
                 };
 
+                endpointTextSubpageMap.Add("json/", APIEndpointsJSON);
+                endpointTextSubpageMap.Add("json/solar-cycle/", APIEndpointsJSONSolarCycle);
+                endpointTextSubpageMap.Add("json/stereo/", APIEndpointsJSONStereo);
+                endpointTextSubpageMap.Add("json/rtsw/", APIEndpointsJSONRTSW);
+                endpointTextSubpageMap.Add("json/geospace/", APIEndpointsJSONGeoSpace);
 
-                endpointSubpageMap.Add("json/", APIEndpointsJSON);
-                endpointSubpageMap.Add("json/solar-cycle/", APIEndpointsJSONSolarCycle);
-                endpointSubpageMap.Add("json/stereo/", APIEndpointsJSONStereo);
-                endpointSubpageMap.Add("json/rtsw/", APIEndpointsJSONRTSW);
-                endpointSubpageMap.Add("json/geospace/", APIEndpointsJSONGeoSpace);
+                List<String> APIEndpointsImageACEEPAM = new List<String>
+                {
+                    "ace-epam-2-hour.gif",
+                    "ace-epam-6-hour.gif",
+                    "ace-epam-24-hour.gif",
+                    "ace-epam-3-day.gif",
+                    "ace-epam-7-day.gif",
 
-                List<string> responseLast = new List<string>();
-                //Call each API endpoint async
-                foreach (string subpage in endpointSubpageMap.Keys)
+                    "ace-epam-e-2-hour.gif",
+                    "ace-epam-e-6-hour.gif",
+                    "ace-epam-e-24-hour.gif",
+                    "ace-epam-e-3-day.gif",
+                    "ace-epam-e-7-day.gif",
+
+                    "ace-epam-p-2-hour.gif",
+                    "ace-epam-p-6-hour.gif",
+                    "ace-epam-p-24-hour.gif",
+                    "ace-epam-p-3-day.gif",
+                    "ace-epam-p-7-day.gif",
+                    "ace-mag-2-hour.gif",
+                    "ace-mag-6-hour.gif",
+                    "ace-mag-24-hour.gif",
+                    "ace-mag-3-day.gif",
+                    "ace-mag-7-day.gif"
+                };
+
+                endpointImageSubpageMap.Add("/images/", APIEndpointsImageACEEPAM);
+
+                List<string> responseLastText = new List<string>();
+                List<Image> responseLastImage = new List<Image>();
+                //Call each text API endpoint async
+                foreach (string subpage in endpointTextSubpageMap.Keys)
                 {
                     //Blank string on end as NOAA does not need authentication yet
-                    responseLast = await CallAPITextEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get, "", subpage);
+                    responseLastText = await CallAPITextEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointTextSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get, "", subpage);
                 }
-                return responseLast;
+                //Call each image API endpoint async
+                foreach (string subpage in endpointImageSubpageMap.Keys)
+                {
+                    //Blank string on end as NOAA does not need authentication yet
+                    responseLastImage = await CallAPIImageEndpointsAsync("https://services.swpc.noaa.gov/" + subpage, endpointImageSubpageMap.GetValueOrDefault(subpage), HttpMethod.Get, "", subpage);
+                }
+                return responseLastText;
             }
             catch (Exception ex)
             {

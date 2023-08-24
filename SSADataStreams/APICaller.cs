@@ -13,6 +13,8 @@ using System.Xml;
 using System.Net.Http;
 using SixLabors.ImageSharp;
 using System.Collections;
+using SixLabors.ImageSharp.Formats.Gif;
+using SixLabors.ImageSharp.Formats;
 
 namespace SSADataStreams
 {
@@ -101,7 +103,7 @@ namespace SSADataStreams
                 Stream stream = await response.Content.ReadAsStreamAsync();
                 byte[] imageData = new byte[stream.Length];
                 stream.Read(imageData, 0, (int)stream.Length);
-                var image = Image.Load<Rgba32>(stream);
+                var image = Image.Load<Rgba32>(imageData);
                 //Check status code
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
@@ -121,8 +123,10 @@ namespace SSADataStreams
                 {
                     subFolder = "\\" + subFolder;
                 }
+                string directoryPath = ".\\Data\\CurrentRun\\" + subFolder + "\\";
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
                 //Save image to file
-                image.Save(subFolder);
+                image.Save(directoryPath + "\\" + endpoint);
             }
             return responses;
         }

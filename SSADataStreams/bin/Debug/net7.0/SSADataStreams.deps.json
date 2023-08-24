@@ -10,6 +10,7 @@
         "dependencies": {
           "CsvHelper": "30.0.1",
           "Newtonsoft.Json": "13.0.3",
+          "SixLabors.ImageSharp": "3.0.1",
           "System.Drawing.Common": "7.0.0"
         },
         "runtime": {
@@ -45,6 +46,14 @@
           "lib/net6.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
             "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/3.0.1": {
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.1.0"
           }
         }
       },
@@ -95,6 +104,13 @@
       "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o0v/J6SJwp3RFrzR29beGx0cK7xcMRgOyIuw8ZNLQyNnBhiyL/vIQKn7cfycthcWUPG3XezUjFwBWzkcUUDFbg==",
+      "path": "sixlabors.imagesharp/3.0.1",
+      "hashPath": "sixlabors.imagesharp.3.0.1.nupkg.sha512"
     },
     "System.Drawing.Common/7.0.0": {
       "type": "package",
