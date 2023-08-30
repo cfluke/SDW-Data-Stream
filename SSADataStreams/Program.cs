@@ -10,7 +10,7 @@ List<APICaller> APICallerList = new List<APICaller>();
 SpaceWeatherServiceAPICaller SpaceWeatherServiceCaller = new SpaceWeatherServiceAPICaller();
 NOAASWPCAPICaller NOAASWPCCaller = new NOAASWPCAPICaller();
 //Add API callers to list to run through
-APICallerList.Add(SpaceWeatherServiceCaller);
+//APICallerList.Add(SpaceWeatherServiceCaller);
 APICallerList.Add(NOAASWPCCaller);
 //Run through each caller, write response to file
 foreach (APICaller APICaller in APICallerList)

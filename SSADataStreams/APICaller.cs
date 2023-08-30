@@ -132,6 +132,13 @@ namespace SSADataStreams
         }
         public abstract Task<List<string>> CallAPIAsync();
 
+        public List<string> ReadEndpointFile()
+        {
+            List<string> endpoints = File.ReadAllLines(".\\Endpoints\\" + this.APICallerName + ".txt").ToList();
+            return endpoints;
+        }
+
+
         public static void WriteCSVFile(string fileName, string folderName, string jsonContent)
         {
             //Console.WriteLine(jsonContent);
@@ -159,6 +166,5 @@ namespace SSADataStreams
             DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
             File.WriteAllLines(directoryPath + fileName + ".csv", lines);
         }
-
     }
 }

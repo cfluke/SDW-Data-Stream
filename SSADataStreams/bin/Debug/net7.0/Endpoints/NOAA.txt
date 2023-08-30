@@ -1,0 +1,10 @@
+f10-7cm-flux-smoothed.json
+f10-7cm-flux.json
+observed-solar-cycle-indices.json
+predicted-solar-cycle.json
+solar-cycle-25-f10-7cm-flux-predicted-high-low.json
+solar-cycle-25-predicted.json
+solar-cycle-25-ssn-predicted-high-low.json
+sunspots-smoothed.json
+sunspots.json
+swpc_observed_ssn.json

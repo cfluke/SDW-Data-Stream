@@ -17,6 +17,8 @@ namespace SSADataStreams
         {
             try
             {
+                var testList = ReadEndpointFile();
+                Console.WriteLine(testList.Count());
                 //API endpoints that only require an API key
                 //The endpoints can return blank if there is no alert/warning
                 Dictionary<string, List<string>> endpointTextSubpageMap = new Dictionary<string, List<string>>();
