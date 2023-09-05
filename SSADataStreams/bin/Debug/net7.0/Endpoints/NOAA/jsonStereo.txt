@@ -1,0 +1,1 @@
+https://services.swpc.noaa.gov/json/stereo/stereo_a_1m.json

@@ -27,14 +27,14 @@ namespace SSADataStreams
         protected APICaller(string APICallerName) {
             _APICallerName = APICallerName;
         }
-        public async Task<List<string>> CallAPITextEndpointsAsync(string baseURL, List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "", string subFolder = "")
+        public async Task<List<string>> CallAPITextEndpointsAsync(List<string> endpoints, HttpMethod httpMethod , string JSONOptions = "", string subFolder = "")
         {
             List<string> responses = new List<string>();
             //Create an HttpClient instance (Created here as HttpClients should be reused)
             HttpClient httpClient = new HttpClient();
             foreach (string endpoint in endpoints)
             {
-                string fullURL = baseURL + endpoint;
+                string fullURL = endpoint;
                 //Log URL
                 Console.WriteLine("Pulling data from: " + fullURL);
                 //Create the HTTP request content
@@ -71,7 +71,9 @@ namespace SSADataStreams
                 {
                     subFolder = "\\" + subFolder;
                 }
-                WriteCSVFile(endpoint, APICallerName + subFolder, responseJson);
+                string fileName = Path.GetFileNameWithoutExtension(endpoint);
+
+                WriteCSVFile(fileName, APICallerName + subFolder, responseJson);
             }
             return responses;
         }
@@ -132,10 +134,25 @@ namespace SSADataStreams
         }
         public abstract Task<List<string>> CallAPIAsync();
 
-        public List<string> ReadEndpointFile()
+        public Dictionary<string, List<string>> ReadEndpointFiles()
         {
-            List<string> endpoints = File.ReadAllLines(".\\Endpoints\\" + this.APICallerName + ".txt").ToList();
-            return endpoints;
+            string folderPath = ".\\Endpoints\\" + this.APICallerName + "\\";
+            Dictionary<string, List<string>> endpointsMap = new Dictionary<string, List<string>>();
+
+            foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                Console.WriteLine(fileName);
+                //Add all lines of text file to endpoint list
+                if (endpointsMap.ContainsKey(fileName))
+                {
+                    endpointsMap[fileName].AddRange(File.ReadAllLines(file).ToList());
+                } else
+                {
+                    endpointsMap.Add(fileName, File.ReadAllLines(file).ToList());
+                }
+            }
+            return endpointsMap;
         }
 
 

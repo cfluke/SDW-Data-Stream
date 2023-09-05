@@ -1,0 +1,3 @@
+https://services.swpc.noaa.gov/json/geospace/geospace_dst_1_hour.json
+https://services.swpc.noaa.gov/json/geospace/geospace_pred_est_kp_1_hour.json
+https://services.swpc.noaa.gov/json/geospace/geospce_pred_est_kp_7_day.json

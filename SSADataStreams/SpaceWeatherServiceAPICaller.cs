@@ -55,8 +55,8 @@ namespace SSADataStreams
 		        }";
                 List<String> returnList = new List<String>();
                 //Call each API endpoint async
-                returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsWithOptions, HttpMethod.Post, optionsReduced));
-                returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsNoOptions, HttpMethod.Post, APIKeyOnly));
+                //returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsWithOptions, HttpMethod.Post, optionsReduced));
+                //returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsNoOptions, HttpMethod.Post, APIKeyOnly));
                 return returnList;
             }
             catch (Exception ex)
