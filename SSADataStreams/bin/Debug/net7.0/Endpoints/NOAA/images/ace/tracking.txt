@@ -1,0 +1,2 @@
+https://services.swpc.noaa.gov/images/ace-tracking-6-hour.gif
+https://services.swpc.noaa.gov/images/ace-tracking-48-hour.gif

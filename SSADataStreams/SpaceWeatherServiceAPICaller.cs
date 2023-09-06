@@ -12,7 +12,7 @@ namespace SSADataStreams
         {
 
         }
-        public override async Task<List<string>> CallAPIAsync()
+        public override async Task<string> CallAPIAsync()
         {
             try
             {
@@ -57,12 +57,12 @@ namespace SSADataStreams
                 //Call each API endpoint async
                 //returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsWithOptions, HttpMethod.Post, optionsReduced));
                 //returnList.Concat(await CallAPITextEndpointsAsync("https://sws-data.sws.bom.gov.au/api/v1/", APIEndpointsNoOptions, HttpMethod.Post, APIKeyOnly));
-                return returnList;
+                return "";
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<String> { ex.ToString() };
+                return ex.ToString();
             }
         }
     }

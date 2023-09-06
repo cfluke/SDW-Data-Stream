@@ -1,0 +1,5 @@
+https://services.swpc.noaa.gov/images/ace-mag-swepam-2-hour.gif
+https://services.swpc.noaa.gov/images/ace-mag-swepam-6-hour.gif
+https://services.swpc.noaa.gov/images/ace-mag-sewpam-24-hour.gif
+https://services.swpc.noaa.gov/images/ace-mag-swepam-3-day.gif
+https://services.swpc.noaa.gov/images/ace-mag-swepam-7-day.gif

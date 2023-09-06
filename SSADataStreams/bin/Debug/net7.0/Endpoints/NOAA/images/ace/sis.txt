@@ -1,0 +1,5 @@
+https://services.swpc.noaa.gov/images/ace-sis-2-hour.gif
+https://services.swpc.noaa.gov/images/ace-sis-6-hour.gif
+https://services.swpc.noaa.gov/images/ace-sis-24-hour.gif
+https://services.swpc.noaa.gov/images/ace-sis-3-day.gif
+https://services.swpc.noaa.gov/images/ace-sis-7-day.gif
