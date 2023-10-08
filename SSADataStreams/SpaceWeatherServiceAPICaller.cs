@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SSADataStreams
 {
-    internal class SpaceWeatherServiceAPICaller : APICaller
+    public class SpaceWeatherServiceAPICaller : APICaller
     {
         public SpaceWeatherServiceAPICaller(): base("SpaceWeather")
         {

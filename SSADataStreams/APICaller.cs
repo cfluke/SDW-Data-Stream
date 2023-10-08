@@ -23,7 +23,7 @@ namespace SSADataStreams
     {
         public static readonly bool isDebugMode = false;
     }
-    internal abstract class APICaller
+    public abstract class APICaller
     {
         private string _APICallerName;
         public string APICallerName { get => _APICallerName; set => _APICallerName = value; }
@@ -100,6 +100,7 @@ namespace SSADataStreams
         {
             //Create an HttpClient instance (Created here as HttpClients should be reused)
             HttpClient httpClient = new HttpClient();
+            string lastHTTPType = string.Empty;
             foreach (string endpoint in endpoints)
             {
                 //Log URL
@@ -124,14 +125,14 @@ namespace SSADataStreams
                 if (Globals.isDebugMode) { Console.WriteLine("DEBUG Content type is " + responseMediaHeaderType); }
                 if (Equals(jsonMediaHeaderType, responseMediaHeaderType))
                 {
-                    CallAPITextEndpointsAsync(response, endpoint, subFolder);
+                    lastHTTPType = await CallAPITextEndpointsAsync(response, endpoint, subFolder);
                 }
                 else if (Equals(imageMediaHeaderType, responseMediaHeaderType))
                 {
-                    CallAPIImageEndpointsAsync(response, endpoint, subFolder);
+                    lastHTTPType = await CallAPIImageEndpointsAsync(response, endpoint, subFolder);
                 }
             }
-            return "";
+            return lastHTTPType;
         }
         //If endpoint type is text then this function will be used to get data
         public async Task<string> CallAPITextEndpointsAsync(HttpResponseMessage response, string endpoint, string subFolder = "")
@@ -162,7 +163,7 @@ namespace SSADataStreams
             string fileName = Path.GetFileNameWithoutExtension(endpoint);
 
             WriteCSVFile(fileName, APICallerName + subFolder, responseJson);
-            return responseString;
+            return "application/json";
         }
         //If endpoint type is image then this function will be used to get data
         public async Task<string> CallAPIImageEndpointsAsync(HttpResponseMessage response, string endpoint, string subFolder = "")
@@ -198,7 +199,7 @@ namespace SSADataStreams
                 DirectoryInfo directoryInfo = Directory.CreateDirectory(directoryPath);
                 //Save image to file
                 image.Save(directoryPath + fileName);
-                return responseString;
+                return "image/gif";
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());

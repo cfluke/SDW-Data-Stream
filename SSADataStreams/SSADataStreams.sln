@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSADataStreams", "SSADataStreams.csproj", "{FB64D5F2-5F56-48F9-9F2B-D948ACFBDF84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSADataStreamsUnitTests", "..\SSADataStreamsUnitTests\SSADataStreamsUnitTests.csproj", "{B1917E3A-487D-4495-9E2B-470FBECDDEC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FB64D5F2-5F56-48F9-9F2B-D948ACFBDF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB64D5F2-5F56-48F9-9F2B-D948ACFBDF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB64D5F2-5F56-48F9-9F2B-D948ACFBDF84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1917E3A-487D-4495-9E2B-470FBECDDEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1917E3A-487D-4495-9E2B-470FBECDDEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1917E3A-487D-4495-9E2B-470FBECDDEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1917E3A-487D-4495-9E2B-470FBECDDEC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

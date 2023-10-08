@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SSADataStreams
 {
-    internal class NOAASWPCAPICaller : APICaller
+    public class NOAASWPCAPICaller : APICaller
     {
         //Implement the caller as an extension of APICaller with name
         public NOAASWPCAPICaller(): base("NOAA")

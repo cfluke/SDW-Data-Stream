@@ -1,0 +1,3 @@
+https://services.swpc.noaa.gov/json/rtsw/rtsw_ephemerides_1h.json
+https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json
+https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json

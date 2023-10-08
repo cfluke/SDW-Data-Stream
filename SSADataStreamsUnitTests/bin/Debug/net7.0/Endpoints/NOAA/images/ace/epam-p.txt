@@ -1,0 +1,5 @@
+https://services.swpc.noaa.gov/images/ace-epam-p-2-hour.gif
+https://services.swpc.noaa.gov/images/ace-epam-p-6-hour.gif
+https://services.swpc.noaa.gov/images/ace-epam-p-24-hour.gif
+https://services.swpc.noaa.gov/images/ace-epam-p-3-day.gif
+https://services.swpc.noaa.gov/images/ace-epam-p-7-day.gif

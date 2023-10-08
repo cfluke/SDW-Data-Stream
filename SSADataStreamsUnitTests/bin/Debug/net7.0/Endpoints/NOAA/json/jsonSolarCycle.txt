@@ -1,0 +1,10 @@
+https://services.swpc.noaa.gov/json/solar-cycle/f10-7cm-flux-smoothed.json
+https://services.swpc.noaa.gov/json/solar-cycle/f10-7cm-flux.json
+https://services.swpc.noaa.gov/json/solar-cycle/observed-solar-cycle-indices.json
+https://services.swpc.noaa.gov/json/solar-cycle/predicted-solar-cycle.json
+https://services.swpc.noaa.gov/json/solar-cycle/solar-cycle-25-f10-7cm-flux-predicted-high-low.json
+https://services.swpc.noaa.gov/json/solar-cycle/solar-cycle-25-predicted.json
+https://services.swpc.noaa.gov/json/solar-cycle/solar-cycle-25-ssn-predicted-high-low.json
+https://services.swpc.noaa.gov/json/solar-cycle/sunspots-smoothed.json
+https://services.swpc.noaa.gov/json/solar-cycle/sunspots.json
+https://services.swpc.noaa.gov/json/solar-cycle/swpc_observed_ssn.json

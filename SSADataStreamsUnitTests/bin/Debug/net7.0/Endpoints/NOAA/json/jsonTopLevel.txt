@@ -1,0 +1,12 @@
+https://services.swpc.noaa.gov/json/boulder_k_index_1m.json
+https://services.swpc.noaa.gov/json/edited_events.json
+https://services.swpc.noaa.gov/json/electron_fluence_forecast.json
+https://services.swpc.noaa.gov/json/enlil_time_series.json
+https://services.swpc.noaa.gov/json/f107_cm_flux.json
+https://services.swpc.noaa.gov/json/planetary_k_index_1m.json
+https://services.swpc.noaa.gov/json/predicted_f107cm_flux.json
+https://services.swpc.noaa.gov/json/predicted_fredericksburg_a_index.json
+https://services.swpc.noaa.gov/json/predicted_monthly_sunspot_number.json
+https://services.swpc.noaa.gov/json/solar_probabilities.json
+https://services.swpc.noaa.gov/json/solar_regions.json
+https://services.swpc.noaa.gov/json/sunspot_report.json
